@@ -1,0 +1,67 @@
+#root {
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.App {
+  width: 100%;
+  height: 100%;
+}
+/*
+THIS IS COMPONENT CSS
+*/
+.duel-display-container {
+  padding: .125em;
+}
+.duel-display {
+  display: flex;
+
+}
+.duel-display-name {
+  min-width: 9rem;
+  max-width: 9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.life-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5em;
+  min-height: 3em;
+  color: whitesmoke;
+  background-color: #06a84a;
+  border: solid 2px #02281f;
+  border-radius: 1em;
+}
+.duel-grid-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.displayArea-middle {
+  display: flex;
+  justify-content: space-around;
+  border: #06a84a 1px solid;
+} 
+
+.display-left {
+  /* position: absolute; */
+  transform: rotate(90deg);
+
+  width: 100%;
+  /* left: 0; */
+}
+.display-right {
+  /* position: absolute; */
+  transform: rotate(-90deg);
+  width: 100%;
+  /* right: 0; */
+}

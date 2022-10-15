@@ -1,13 +1,13 @@
-import './App.css'
-import DuelDisplay from './components/DuelDisplay'
+import "./styles/App.css";
+import DuelGrid from "./components/DuelGrid";
 
+const players = ["Player 1", "Player 2", "dal", "looool"];
 function App() {
-
   return (
     <div className="App">
-      <DuelDisplay currentLP={8000} duelistName="Doug Dimmadome" id={987} />
+      <DuelGrid players={players} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

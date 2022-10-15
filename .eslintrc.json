@@ -14,11 +14,13 @@
     ],
     "overrides": [
     ],
+    "ignorePatterns": ["/*.*"], // removes error on vite.config.ts https://stackoverflow.com/questions/61956555/why-is-typescript-eslint-parser-including-files-outside-of-those-configured-in
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "ecmaFeatures": {"jsx": true}
+        "ecmaFeatures": {"jsx": true},
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "react",

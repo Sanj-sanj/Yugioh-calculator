@@ -1,19 +1,25 @@
 type DISPLAY_DATA = {
-    currentLP: number,
-    duelistName: string,
-    id: number
-}
+  currentLP: number;
+  duelistName: string;
+  id: number;
+  className: string;
+};
 
-function DuelDisplay ({currentLP, duelistName, id}: DISPLAY_DATA) {
-    return (
-        <div className="duel-display">
-            BAKANA KOTO WO 
-            <div className='display-flex'>
-                <h2>{duelistName}</h2>
-                <div>{currentLP}</div>
-            </div>
-            {id}
+const DuelDisplay = ({
+  currentLP,
+  duelistName,
+  id,
+  className,
+}: DISPLAY_DATA) => {
+  return (
+    <div className={`duel-display-container ${className}`}>
+      <div className="duel-display">
+        <div className="duel-display-name">{duelistName}</div>
+        <div className="life-bar">
+          <div>{currentLP}</div>
         </div>
-    )
-}
-export default DuelDisplay
+      </div>
+    </div>
+  );
+};
+export default DuelDisplay;
