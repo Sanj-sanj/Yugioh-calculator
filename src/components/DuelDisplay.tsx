@@ -19,6 +19,10 @@ const DuelDisplay = ({
           <div>{currentLP}</div>
         </div>
       </div>
+      <div className="display-interact">
+        <button>+</button>
+        <button>-</button>
+      </div>
     </div>
   );
 };

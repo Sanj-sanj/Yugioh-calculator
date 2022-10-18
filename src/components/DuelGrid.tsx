@@ -1,19 +1,25 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useReducer } from "react";
+import displayReducer from "../state/displayReducer";
+import { duelDisplayState } from "../state/duelDisplayState";
 import DuelDisplay from "./DuelDisplay";
 
 const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
-  const duelistsComponent = players.map((playerName, i) => (
+  const [{ lp }] = useReducer(displayReducer, duelDisplayState);
+
+  const duelist = players.map((playerName, i) => (
     <DuelDisplay
       key={i}
-      currentLP={8000}
+      currentLP={lp}
       duelistName={playerName}
       id={i}
-      className={`duelist duelist-${i + 1}`}
+      className={`duelist duelist-${i + 1} ${
+        (i === 1 && "display-reverse") || ""
+      }`}
     />
   ));
   return (
     <section className="duel-grid-container">
-      <div className="displayArea-edge">{duelistsComponent[0]}</div>
+      {duelist[0]}
       <div className="displayArea-middle">
         <div>Dice toss</div>
         <div>Coin flip</div>
@@ -21,7 +27,7 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
         <div>logs</div>
         <div>timer</div>
       </div>
-      <div className="displayArea-edge">{duelistsComponent[1]}</div>
+      {duelist[1]}
     </section>
   );
 };

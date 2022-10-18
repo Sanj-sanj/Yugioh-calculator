@@ -13,12 +13,22 @@
 /*
 THIS IS COMPONENT CSS
 */
-.duel-display-container {
+.duel-display-container-top {
+  display: flex;
+  flex-direction: column;
+}
+.display-reverse {
+  display: flex;
+  flex-direction: column-reverse;
   padding: .125em;
+}
+.display-interact {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 79%;
 }
 .duel-display {
   display: flex;
-
 }
 .duel-display-name {
   min-width: 9rem;
