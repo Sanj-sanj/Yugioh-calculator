@@ -1,7 +1,7 @@
 import "./styles/App.css";
 import DuelGrid from "./components/DuelGrid";
 
-const players = ["Player 1", "Player 2", "dal", "looool"];
+const players = ["Player 1", "Player 2"];
 function App() {
   return (
     <div className="App">

@@ -1,7 +1,7 @@
-import { FunctionComponent } from "react";
+import { PlayerNames } from "./duelDisplayTypes"
 
 export type DuelDisplayInterface = {
     currentLP: number,
     duelistName: string,
-    id: number
+    id: PlayerNames
 }

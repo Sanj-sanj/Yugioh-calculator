@@ -1,12 +1,16 @@
+import { DisplayActions, PlayerNames } from "../interfaces/duelDisplayTypes";
+
 type DISPLAY_DATA = {
   currentLP: number;
+  lpModifier: React.Dispatch<DisplayActions>;
   duelistName: string;
-  id: number;
+  id: PlayerNames;
   className: string;
 };
 
 const DuelDisplay = ({
   currentLP,
+  lpModifier,
   duelistName,
   id,
   className,
@@ -20,8 +24,26 @@ const DuelDisplay = ({
         </div>
       </div>
       <div className="display-interact">
-        <button>+</button>
-        <button>-</button>
+        <button
+          onClick={() =>
+            lpModifier({
+              type: "INCREMENT",
+              payload: { player: id, operand2: 100 },
+            })
+          }
+        >
+          +
+        </button>
+        <button
+          onClick={() =>
+            lpModifier({
+              type: "DECREMENT",
+              payload: { player: id, operand2: 100 },
+            })
+          }
+        >
+          -
+        </button>
       </div>
     </div>
   );
