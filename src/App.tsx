@@ -6,6 +6,7 @@ function App() {
   return (
     <div className="App">
       <DuelGrid players={players} />
+      <div id="modal-root"></div>
     </div>
   );
 }

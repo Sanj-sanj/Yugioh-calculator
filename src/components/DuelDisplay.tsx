@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import { DisplayActions, PlayerNames } from "../interfaces/duelDisplayTypes";
 
 type DISPLAY_DATA = {
@@ -5,12 +6,14 @@ type DISPLAY_DATA = {
   lpModifier: React.Dispatch<DisplayActions>;
   duelistName: string;
   id: PlayerNames;
+  toggleModal: (operand: string) => void;
   className: string;
 };
 
-const DuelDisplay = ({
+const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
   currentLP,
   lpModifier,
+  toggleModal,
   duelistName,
   id,
   className,
@@ -24,14 +27,7 @@ const DuelDisplay = ({
         </div>
       </div>
       <div className="display-interact">
-        <button
-          onClick={() =>
-            lpModifier({
-              type: "INCREMENT",
-              payload: { player: id, operand2: 100 },
-            })
-          }
-        >
+        <button onClick={(e) => toggleModal(e.currentTarget.innerText)}>
           +
         </button>
         <button

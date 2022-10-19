@@ -1,25 +1,34 @@
-import { FunctionComponent, useReducer } from "react";
+import {
+  Dispatch,
+  FunctionComponent,
+  SetStateAction,
+  useReducer,
+  useState,
+} from "react";
 import { PlayerData } from "../interfaces/duelDisplayTypes";
-import displayReducer from "../state/displayReducer";
 import { duelDisplayState } from "../state/duelDisplayState";
+import displayReducer from "../state/displayReducer";
 import DuelDisplay from "./DuelDisplay";
+import Modal from "./Modal";
 
 const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const [{ player1, player2 }, dispatch] = useReducer(
     displayReducer,
     duelDisplayState
   );
+
+  const [modalOperand, setModalOperand] = useState("");
   const itter = [player1, player2][Symbol.iterator]();
 
   const duelist = players.map((playerName, i) => {
     const player = itter.next().value as PlayerData;
-
     return (
       <DuelDisplay
         key={i}
         currentLP={player.lp}
         lpModifier={dispatch}
-        duelistName={playerName}
+        duelistName={player.playerName}
+        toggleModal={(operand: string) => setModalOperand(operand)}
         id={player.playerName}
         className={`duelist duelist-${i + 1} ${
           (i === 1 && "display-reverse") || ""
@@ -39,6 +48,29 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
         <div>timer</div>
       </div>
       {duelist[1]}
+      <>
+        {modalOperand !== "" ? (
+          <Modal>
+            <div className="calc-container">
+              <div className="calc-row">
+                <div className="calc-button">1</div>
+                <div className="calc-button">2</div>
+                <div className="calc-button">3</div>
+              </div>
+              <div className="calc-row">
+                <div className="calc-button">4</div>
+                <div className="calc-button">5</div>
+                <div className="calc-button">6</div>
+              </div>
+              <div className="calc-row">
+                <div className="calc-button">7</div>
+                <div className="calc-button">8</div>
+                <div className="calc-button">9</div>
+              </div>
+            </div>
+          </Modal>
+        ) : null}
+      </>
     </section>
   );
 };
