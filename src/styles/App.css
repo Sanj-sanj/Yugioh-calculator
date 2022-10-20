@@ -81,6 +81,11 @@ THIS IS COMPONENT CSS
 
 /* CALC STUFF */
 
+.calculator {
+  border: #0c7c3b solid 2px;
+  background-color: #071b17;
+  width: 75%;
+}
 .calc-container {
   height: 100%;
   width: 100%;
@@ -91,11 +96,25 @@ THIS IS COMPONENT CSS
   align-items: center;
   justify-content: center;
 }
+.calc-screen {
+  background-color: #071b17;
+  padding: 0.5em;
+  font-size: 20px;
+  text-align: right ;
+  width: 80%;
+}
+.calc-top {
+  display: flex;
+}
 .calc-row {
   display: flex;
 }
 .calc-button {
-  padding: 1em;
+  padding: 1em 2em;
+  width: 100%;
   background-color: #02281f;
   border: #06a84a solid 1px;
+}
+.calc-top > .calc-button {
+  width: 20%;
 }

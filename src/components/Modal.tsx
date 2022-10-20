@@ -4,7 +4,10 @@ import { createPortal } from "react-dom";
 const Modal: FunctionComponent<React.PropsWithChildren> = ({ children }) => {
   const modalRoot = document.getElementById("modal-root");
   const itemRef: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
-  if (!itemRef.current) itemRef.current = document.createElement("div");
+  if (!itemRef.current) {
+    itemRef.current = document.createElement("div");
+    itemRef.current.classList.add("calc-container");
+  }
 
   useEffect(() => {
     if (itemRef.current) modalRoot?.appendChild(itemRef.current);

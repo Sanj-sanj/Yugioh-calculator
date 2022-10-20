@@ -10,6 +10,7 @@ import { duelDisplayState } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
 import DuelDisplay from "./DuelDisplay";
 import Modal from "./Modal";
+import Calculator from "./Calculator";
 
 const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const [{ player1, player2 }, dispatch] = useReducer(
@@ -51,23 +52,7 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
       <>
         {modalOperand !== "" ? (
           <Modal>
-            <div className="calc-container">
-              <div className="calc-row">
-                <div className="calc-button">1</div>
-                <div className="calc-button">2</div>
-                <div className="calc-button">3</div>
-              </div>
-              <div className="calc-row">
-                <div className="calc-button">4</div>
-                <div className="calc-button">5</div>
-                <div className="calc-button">6</div>
-              </div>
-              <div className="calc-row">
-                <div className="calc-button">7</div>
-                <div className="calc-button">8</div>
-                <div className="calc-button">9</div>
-              </div>
-            </div>
+            <Calculator modalOperand={modalOperand} />
           </Modal>
         ) : null}
       </>

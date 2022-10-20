@@ -27,7 +27,11 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
         </div>
       </div>
       <div className="display-interact">
-        <button onClick={(e) => toggleModal(e.currentTarget.innerText)}>
+        <button
+          onClick={(e) =>
+            toggleModal(`${currentLP} ${e.currentTarget.innerText}`)
+          }
+        >
           +
         </button>
         <button
