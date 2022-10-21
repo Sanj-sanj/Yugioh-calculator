@@ -1,15 +1,11 @@
 import { FunctionComponent } from "react";
-import { Operands, PlayerNames } from "../interfaces/duelDisplayTypes";
+import { CalculatorData, PlayerNames } from "../interfaces/duelDisplayTypes";
 
 type DISPLAY_DATA = {
   currentLP: number;
   duelistName: string;
   id: PlayerNames;
-  openModal: (
-    operand: Operands,
-    player: PlayerNames,
-    currentLP: number
-  ) => void;
+  openModal: (data: CalculatorData) => void;
   className: string;
 };
 
@@ -29,8 +25,16 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
         </div>
       </div>
       <div className="display-interact">
-        <button onClick={() => openModal("+", id, currentLP)}>+</button>
-        <button onClick={() => openModal("-", id, currentLP)}>-</button>
+        <button
+          onClick={() => openModal({ operand: "+", player: id, currentLP })}
+        >
+          +
+        </button>
+        <button
+          onClick={() => openModal({ operand: "-", player: id, currentLP })}
+        >
+          -
+        </button>
       </div>
     </div>
   );

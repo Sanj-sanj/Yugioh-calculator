@@ -1,43 +1,19 @@
-import {
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-  useReducer,
-  useState,
-} from "react";
-import {
-  CalculatorData,
-  Operands,
-  PlayerData,
-  PlayerNames,
-} from "../interfaces/duelDisplayTypes";
+import { FunctionComponent, useReducer, useState } from "react";
+import { CalculatorData, PlayerData } from "../interfaces/duelDisplayTypes";
 import { duelDisplayState } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
 import DuelDisplay from "./DuelDisplay";
-import Modal from "./Modal";
 import Calculator from "./Calculator";
+import Modal from "./Modal/Modal";
+import openModal from "./Modal/openModal";
 
 const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const [{ player1, player2 }, dispatch] = useReducer(
     displayReducer,
     duelDisplayState
   );
-
   const [toggleModal, setToggleModal] = useState(false);
-
-  function openModal(
-    operand: Operands,
-    player: PlayerNames,
-    currentLP: number
-  ) {
-    setToggleModal(true);
-    setCalculationData({
-      player: player,
-      currentLP: currentLP,
-      operand: operand,
-    });
-  }
-
+  //state that gets consumed by Calculator component once passed to each Duel display
   const [calculationData, setCalculationData] = useState<CalculatorData>({
     player: "player1",
     currentLP: 8000,
@@ -52,7 +28,9 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
         key={i}
         currentLP={player.lp}
         duelistName={player.playerName}
-        openModal={openModal}
+        openModal={(calcData: CalculatorData) =>
+          openModal(calcData, { setToggleModal, setCalculationData })
+        }
         id={player.playerName}
         className={`duelist duelist-${i + 1} ${
           (i === 1 && "display-reverse") || ""

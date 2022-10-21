@@ -1,3 +1,5 @@
+import { SetStateAction } from "react"
+
 type DisplayActionTypes = "INCREMENT" | "DECREMENT"
 
 export type PlayerData = {
@@ -26,3 +28,8 @@ export type CalculatorData = {
     currentLP: number,
     operand: Operands,
   }
+
+export type ModalStateModifiers = {
+    setToggleModal: (v: SetStateAction<boolean>) => void,
+    setCalculationData: (v: SetStateAction<CalculatorData>) => void
+}
