@@ -10,9 +10,7 @@ export type DisplayStates = {
     player1: PlayerData,
     player2: PlayerData
 }
-/**
- * @param {number} payload.operand2 - is like bro
- */
+
 export type DisplayActions = {
     type: DisplayActionTypes;
     payload: {
@@ -20,3 +18,11 @@ export type DisplayActions = {
         player: PlayerNames
     };
   };
+
+export type Operands = "+" | '-'
+
+export type CalculatorData = {
+    player: PlayerNames,
+    currentLP: number,
+    operand: Operands,
+  }

@@ -5,7 +5,12 @@ import {
   useReducer,
   useState,
 } from "react";
-import { PlayerData } from "../interfaces/duelDisplayTypes";
+import {
+  CalculatorData,
+  Operands,
+  PlayerData,
+  PlayerNames,
+} from "../interfaces/duelDisplayTypes";
 import { duelDisplayState } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
 import DuelDisplay from "./DuelDisplay";
@@ -18,18 +23,36 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
     duelDisplayState
   );
 
-  const [modalOperand, setModalOperand] = useState("");
-  const itter = [player1, player2][Symbol.iterator]();
+  const [toggleModal, setToggleModal] = useState(false);
 
+  function openModal(
+    operand: Operands,
+    player: PlayerNames,
+    currentLP: number
+  ) {
+    setToggleModal(true);
+    setCalculationData({
+      player: player,
+      currentLP: currentLP,
+      operand: operand,
+    });
+  }
+
+  const [calculationData, setCalculationData] = useState<CalculatorData>({
+    player: "player1",
+    currentLP: 8000,
+    operand: "+",
+  });
+
+  const itter = [player1, player2][Symbol.iterator]();
   const duelist = players.map((playerName, i) => {
     const player = itter.next().value as PlayerData;
     return (
       <DuelDisplay
         key={i}
         currentLP={player.lp}
-        lpModifier={dispatch}
         duelistName={player.playerName}
-        toggleModal={(operand: string) => setModalOperand(operand)}
+        openModal={openModal}
         id={player.playerName}
         className={`duelist duelist-${i + 1} ${
           (i === 1 && "display-reverse") || ""
@@ -50,9 +73,13 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
       </div>
       {duelist[1]}
       <>
-        {modalOperand !== "" ? (
+        {toggleModal ? (
           <Modal>
-            <Calculator modalOperand={modalOperand} />
+            <Calculator
+              calculationData={calculationData}
+              lpModifier={dispatch}
+              closeModal={() => setToggleModal(false)}
+            />
           </Modal>
         ) : null}
       </>

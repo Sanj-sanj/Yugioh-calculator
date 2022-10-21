@@ -1,19 +1,21 @@
 import { FunctionComponent } from "react";
-import { DisplayActions, PlayerNames } from "../interfaces/duelDisplayTypes";
+import { Operands, PlayerNames } from "../interfaces/duelDisplayTypes";
 
 type DISPLAY_DATA = {
   currentLP: number;
-  lpModifier: React.Dispatch<DisplayActions>;
   duelistName: string;
   id: PlayerNames;
-  toggleModal: (operand: string) => void;
+  openModal: (
+    operand: Operands,
+    player: PlayerNames,
+    currentLP: number
+  ) => void;
   className: string;
 };
 
 const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
   currentLP,
-  lpModifier,
-  toggleModal,
+  openModal,
   duelistName,
   id,
   className,
@@ -27,23 +29,8 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
         </div>
       </div>
       <div className="display-interact">
-        <button
-          onClick={(e) =>
-            toggleModal(`${currentLP} ${e.currentTarget.innerText}`)
-          }
-        >
-          +
-        </button>
-        <button
-          onClick={() =>
-            lpModifier({
-              type: "DECREMENT",
-              payload: { player: id, operand2: 100 },
-            })
-          }
-        >
-          -
-        </button>
+        <button onClick={() => openModal("+", id, currentLP)}>+</button>
+        <button onClick={() => openModal("-", id, currentLP)}>-</button>
       </div>
     </div>
   );
