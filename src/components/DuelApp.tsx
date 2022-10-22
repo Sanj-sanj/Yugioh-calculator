@@ -3,7 +3,7 @@ import { CalculatorData, PlayerData } from "../interfaces/duelDisplayTypes";
 import { duelDisplayState } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
 import DuelDisplay from "./DuelDisplay";
-import Calculator from "./Calculator";
+import Calculator from "./Calculator/Calculator";
 import Modal from "./Modal/Modal";
 import openModal from "./Modal/openModal";
 
@@ -28,10 +28,6 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const duelist = players.map((playerName, i) => {
     const player = itter.next().value as PlayerData;
 
-    // pass dispatch dispatch to append calculation data bit by bit...
-    //open modal doesnt need to do the weird shit it is now just will open the modal
-    //store calculation data in reducer, then on 'return' from calculations screen submit to
-    //reducer if caluclation occered: calcualtor: {v !== 0}, else dont
     return (
       <DuelDisplay
         key={i}

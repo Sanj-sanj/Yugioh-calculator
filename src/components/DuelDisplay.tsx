@@ -29,7 +29,8 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
         </div>
       </div>
       <div className="display-interact">
-        {/* {passing back the operand and Lp values so the modal has the updated with knowledge of which button} */}
+        {/* { passing back the operand and Lp values so the modal has the updated with knowledge of which button } */}
+        {/* { modifier is not assigned yet, default: 'zero'. Then, it will be updated in the reducer by the calc component } */}
         <button
           onClick={() =>
             openModal({ operand: "+", player: id, currentLP, modifier: 0 })
