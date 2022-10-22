@@ -18,6 +18,7 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
     player: "player1",
     currentLP: 8000,
     operand: "+",
+    modifier: 0,
   };
   const [calculationData, setCalculationData] = useState<CalculatorData>(
     initialCalculationState
@@ -26,6 +27,11 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const itter = [player1, player2][Symbol.iterator]();
   const duelist = players.map((playerName, i) => {
     const player = itter.next().value as PlayerData;
+
+    // pass dispatch dispatch to append calculation data bit by bit...
+    //open modal doesnt need to do the weird shit it is now just will open the modal
+    //store calculation data in reducer, then on 'return' from calculations screen submit to
+    //reducer if caluclation occered: calcualtor: {v !== 0}, else dont
     return (
       <DuelDisplay
         key={i}
@@ -64,7 +70,7 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
           <Modal>
             <Calculator
               calculationData={calculationData}
-              lpModifier={dispatch}
+              displayDispatch={dispatch}
               closeModal={() => setToggleModal(false)}
             />
           </Modal>

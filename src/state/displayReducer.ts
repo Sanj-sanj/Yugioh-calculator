@@ -28,21 +28,23 @@ const displayReducer = (
         typeof action.payload.operand2 === "number"
       ) {
         const player = action.payload.player;
+        const remainder = state[player].lp - action.payload.operand2;
         return {
           ...state,
           [player]: {
             ...state[player],
-            lp: state[player].lp - action.payload.operand2,
+            lp: remainder <= 0 ? 0 : remainder,
           },
         };
       }
       return state;
     case "RESET_STATE":
       if (typeof action.payload === "boolean" && action.payload === true) {
-        console.log(duelDisplayState);
         return { ...duelDisplayState };
       }
       return state;
+    case "UPDATE_LOG":
+      return { ...state, log: [...state.log, action.payload] };
 
     default:
       return state;

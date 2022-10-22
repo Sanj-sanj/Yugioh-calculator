@@ -3,15 +3,15 @@ import { CalculatorData, DisplayActions } from "../interfaces/duelDisplayTypes";
 
 const Calculator: FunctionComponent<{
   calculationData: CalculatorData;
-  lpModifier: Dispatch<DisplayActions>;
+  displayDispatch: Dispatch<DisplayActions>;
   closeModal: () => void;
-}> = ({ calculationData, lpModifier, closeModal }) => {
+}> = ({ calculationData, displayDispatch, closeModal }) => {
   const [userLpInput, setUserLpInput] = useState("0");
   // =========                        UTILS TO EXTRACT =======================
 
   function convertAndDispatch() {
     if (calculationData.operand === "+") {
-      lpModifier({
+      displayDispatch({
         type: "INCREMENT",
         payload: {
           operand2: parseInt(userLpInput),
@@ -19,7 +19,7 @@ const Calculator: FunctionComponent<{
         },
       });
     } else {
-      lpModifier({
+      displayDispatch({
         type: "DECREMENT",
         payload: {
           operand2: parseInt(userLpInput),
@@ -27,6 +27,7 @@ const Calculator: FunctionComponent<{
         },
       });
     }
+    displayDispatch({ type: "UPDATE_LOG", payload: calculationData });
   }
 
   function deleteLastInput() {

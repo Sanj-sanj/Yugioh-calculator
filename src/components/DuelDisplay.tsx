@@ -21,17 +21,26 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
       <div className="duel-display">
         <div className="duel-display-name">{duelistName}</div>
         <div className="life-bar">
-          <div>{currentLP}</div>
+          <div
+            className={`life-bar-fill ${id}`}
+            style={{ width: `${(currentLP / 8000) * 100}%` }}
+          ></div>
+          <span className="lp-ammount">{currentLP}</span>
         </div>
       </div>
       <div className="display-interact">
+        {/* {passing back the operand and Lp values so the modal has the updated with knowledge of which button} */}
         <button
-          onClick={() => openModal({ operand: "+", player: id, currentLP })}
+          onClick={() =>
+            openModal({ operand: "+", player: id, currentLP, modifier: 0 })
+          }
         >
           +
         </button>
         <button
-          onClick={() => openModal({ operand: "-", player: id, currentLP })}
+          onClick={() =>
+            openModal({ operand: "-", player: id, currentLP, modifier: 0 })
+          }
         >
           -
         </button>

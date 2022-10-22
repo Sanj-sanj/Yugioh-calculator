@@ -30,6 +30,7 @@ THIS IS COMPONENT CSS
 }
 .duel-display {
   display: flex;
+  position: relative
 }
 .duel-display-name {
   min-width: 9rem;
@@ -41,15 +42,34 @@ THIS IS COMPONENT CSS
 .life-bar {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100%;
-  padding: 0.5em;
+  /* padding: 0.5em; */
   min-height: 3em;
   color: whitesmoke;
-  background-color: #06a84a;
-  border: solid 2px #02281f;
+  /* background-color: #06a84a; */
+  border: solid 2px #199477;
   border-radius: 1em;
 }
+.life-bar-fill {
+  border-radius: 0.875em;
+  height: 100%;
+  background: rgb(43, 155, 58);
+}
+.life-bar-fill.player1 {
+  width: 100%;
+}
+.life-bar-fill.player2 {
+  width: 100%;
+}
+.lp-ammount {
+  position: absolute;
+    display: flex;
+    height: 100%;
+    padding-left: 1em;
+    align-items: center;
+}
+
 .duel-grid-container {
   height: 100%;
   display: flex;

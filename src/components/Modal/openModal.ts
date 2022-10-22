@@ -9,6 +9,7 @@ function openModal(incomingData: CalculatorData, state: ModalStateModifiers) {
     player: incomingData.player,
     currentLP: incomingData.currentLP,
     operand: incomingData.operand,
+    modifier: incomingData.modifier,
   });
 }
 
