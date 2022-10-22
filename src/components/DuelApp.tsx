@@ -7,18 +7,21 @@ import Calculator from "./Calculator";
 import Modal from "./Modal/Modal";
 import openModal from "./Modal/openModal";
 
-const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
+const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const [{ player1, player2 }, dispatch] = useReducer(
     displayReducer,
     duelDisplayState
   );
   const [toggleModal, setToggleModal] = useState(false);
   //state that gets consumed by Calculator component once passed to each Duel display
-  const [calculationData, setCalculationData] = useState<CalculatorData>({
+  const initialCalculationState: CalculatorData = {
     player: "player1",
     currentLP: 8000,
     operand: "+",
-  });
+  };
+  const [calculationData, setCalculationData] = useState<CalculatorData>(
+    initialCalculationState
+  );
 
   const itter = [player1, player2][Symbol.iterator]();
   const duelist = players.map((playerName, i) => {
@@ -45,7 +48,13 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
       <div className="displayArea-middle">
         <div>Dice toss</div>
         <div>Coin flip</div>
-        <div>reset</div>
+        <div>
+          <button
+            onClick={() => dispatch({ type: "RESET_STATE", payload: true })}
+          >
+            Reset
+          </button>
+        </div>
         <div>logs</div>
         <div>timer</div>
       </div>
@@ -65,4 +74,4 @@ const DuelGrid: FunctionComponent<{ players: string[] }> = ({ players }) => {
   );
 };
 
-export default DuelGrid;
+export default DuelApp;
