@@ -41,6 +41,8 @@ export type CalculatorData = {
 };
 
 export type ModalStateModifiers = {
-  setToggleModal: (v: SetStateAction<boolean>) => void;
+  setToggleModal: (v: SetStateAction<ModalViews>) => void;
   setCalculationData: (v: SetStateAction<CalculatorData>) => void;
 };
+
+export type ModalViews = "closed" | "calculator" | "log";

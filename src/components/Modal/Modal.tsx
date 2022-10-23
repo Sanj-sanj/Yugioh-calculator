@@ -6,7 +6,7 @@ const Modal: FunctionComponent<React.PropsWithChildren> = ({ children }) => {
   const itemRef: React.MutableRefObject<null | HTMLDivElement> = useRef(null);
   if (!itemRef.current) {
     itemRef.current = document.createElement("div");
-    itemRef.current.classList.add("calc-container");
+    itemRef.current.classList.add("modal-container");
   }
 
   useEffect(() => {

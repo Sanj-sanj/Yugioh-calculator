@@ -3,8 +3,11 @@ import {
   ModalStateModifiers,
 } from "../../interfaces/duelDisplayTypes";
 
-function openModal(incomingData: CalculatorData, state: ModalStateModifiers) {
-  state.setToggleModal(true);
+function setupCalculatorModal(
+  incomingData: CalculatorData,
+  state: ModalStateModifiers
+) {
+  state.setToggleModal("calculator");
   state.setCalculationData({
     player: incomingData.player,
     currentLP: incomingData.currentLP,
@@ -13,4 +16,4 @@ function openModal(incomingData: CalculatorData, state: ModalStateModifiers) {
   });
 }
 
-export default openModal;
+export default setupCalculatorModal;
