@@ -9,7 +9,7 @@ type DISPLAY_DATA = {
   className: string;
 };
 
-const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
+const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
   currentLP,
   openModal,
   duelistName,
@@ -49,4 +49,4 @@ const DuelDisplay: FunctionComponent<DISPLAY_DATA> = ({
     </div>
   );
 };
-export default DuelDisplay;
+export default DuelistCounter;

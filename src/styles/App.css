@@ -138,3 +138,18 @@ THIS IS COMPONENT CSS
 .calc-top > .calc-button {
   width: 20%;
 }
+
+/* LOGS CSS */
+.log {
+  width: 85%;
+  background-color: #071b17;
+  border: #0c7c3b 1px solid;
+  overflow-y: auto;
+  padding: 1em 0;
+  line-height: 1.5em;
+}
+.log-entry {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0;
+}

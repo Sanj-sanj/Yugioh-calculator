@@ -4,9 +4,12 @@ import {
   ModalViews,
   PlayerData,
 } from "../interfaces/duelDisplayTypes";
-import { duelDisplayState } from "../state/duelDisplayState";
+import {
+  duelDisplayState,
+  initialCalculationState,
+} from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
-import DuelDisplay from "./DuelDisplay";
+import DuelistCounter from "./DuelistCounter";
 import Calculator from "./Calculator/Calculator";
 import Modal from "./Modal/Modal";
 import setupCalculatorModal from "./Modal/setupCalculatorModal";
@@ -20,15 +23,8 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
 
   //convert this state into a string, which will only accept strings of spcifc actions ex: calculator | Dice | logs | coin
   //these strings will be used to determine which modal to render
-
   const [toggleModal, setToggleModal] = useState<ModalViews>("closed");
-  //state that gets consumed by Calculator component once passed to each Duel display
-  const initialCalculationState: CalculatorData = {
-    player: "player1",
-    currentLP: 8000,
-    operand: "+",
-    modifier: 0,
-  };
+
   const [calculationData, setCalculationData] = useState<CalculatorData>(
     initialCalculationState
   );
@@ -37,7 +33,7 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const duelist = players.map((playerName, i) => {
     const player = itter.next().value as PlayerData;
     return (
-      <DuelDisplay
+      <DuelistCounter
         key={i}
         currentLP={player.lp}
         duelistName={player.playerName}
@@ -82,7 +78,7 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
           </Modal>
         ) : toggleModal === "log" ? (
           <Modal>
-            <Log logData={log} />
+            <Log logData={log} closeModal={() => setToggleModal("closed")} />
           </Modal>
         ) : null}
       </>

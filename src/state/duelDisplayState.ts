@@ -1,4 +1,4 @@
-import { DisplayStates } from "../interfaces/duelDisplayTypes";
+import { CalculatorData, DisplayStates } from "../interfaces/duelDisplayTypes";
 
 export const duelDisplayState: DisplayStates = {
   player1: {
@@ -10,4 +10,12 @@ export const duelDisplayState: DisplayStates = {
     playerName: "player2",
   },
   log: [],
+};
+
+//state that gets consumed by Calculator component once passed to each Duel display
+export const initialCalculationState: CalculatorData = {
+  player: "player1",
+  currentLP: 8000,
+  operand: "+",
+  modifier: 0,
 };
