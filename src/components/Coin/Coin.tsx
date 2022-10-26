@@ -1,14 +1,15 @@
 import { FunctionComponent } from "react";
-import rollTheDie from "./Utilities";
-const Dice: FunctionComponent<{ closeModal: () => void }> = ({
+import flipTheCoin from "./Utilities";
+
+const Coin: FunctionComponent<{ closeModal: () => void }> = ({
   closeModal,
 }) => {
   return (
     <button className="dice" onClick={closeModal}>
-      <div>{rollTheDie()}</div>
+      <div>{flipTheCoin()}</div>
       (Tap to make me go away)
     </button>
   );
 };
 
-export default Dice;
+export default Coin;

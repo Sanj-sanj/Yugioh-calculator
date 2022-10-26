@@ -45,4 +45,4 @@ export type ModalStateModifiers = {
   setCalculationData: (v: SetStateAction<CalculatorData>) => void;
 };
 
-export type ModalViews = "closed" | "calculator" | "log";
+export type ModalViews = "closed" | "calculator" | "log" | "dice" | "coin";

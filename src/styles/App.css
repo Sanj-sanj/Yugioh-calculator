@@ -27,10 +27,20 @@ THIS IS COMPONENT CSS
   display: flex;
   justify-content: space-around;
   margin-left: 79%;
+  padding: 0.5em;
+}
+/* OVERWRITE FOR BOTTOM DISPLAY */
+.display-reverse > .display-interact {
+  margin-left: 0;
+  margin-right: 79%;
 }
 .duel-display {
   display: flex;
   position: relative
+}
+/* OVERWRITE FOR BOTTOM DISPLAY */
+.display-reverse > .duel-display {
+  flex-direction: row-reverse;
 }
 .duel-display-name {
   min-width: 9rem;
@@ -51,6 +61,9 @@ THIS IS COMPONENT CSS
   border: solid 2px #199477;
   border-radius: 1em;
 }
+.display-reverse > .duel-display > .life-bar {
+  justify-content: end;
+}
 .life-bar-fill {
   border-radius: 0.875em;
   height: 100%;
@@ -64,10 +77,14 @@ THIS IS COMPONENT CSS
 }
 .lp-ammount {
   position: absolute;
-    display: flex;
-    height: 100%;
-    padding-left: 1em;
-    align-items: center;
+  display: flex;
+  height: 100%;
+  padding-left: 1em;
+  align-items: center;
+}
+.display-reverse > .duel-display > .life-bar > .lp-ammount {
+padding-left: 0;
+padding-right: 1em;
 }
 
 .duel-grid-container {
@@ -152,4 +169,14 @@ THIS IS COMPONENT CSS
     display: flex;
     flex-direction: column;
     padding: 0.5em 0;
+}
+
+/* DICE CSS */
+.dice {
+  width: 65%;
+  background-color: #071b17;
+  border: #0c7c3b 1px solid;
+  overflow-y: auto;
+  padding: 1em 0;
+  line-height: 1.5em;
 }

@@ -15,9 +15,7 @@ const Log: FunctionComponent<{
       ) : (
         logData.map((data, i) => (
           <div key={i} className="log-entry">
-            <h6>
-              Turn: {i} - {data.player}
-            </h6>
+            <h6>{data.player}</h6>
             <div>
               {data.currentLP} {data.operand} {data.modifier} ={" "}
               {data.operand === "+"

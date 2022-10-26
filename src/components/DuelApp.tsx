@@ -14,6 +14,8 @@ import Calculator from "./Calculator/Calculator";
 import Modal from "./Modal/Modal";
 import setupCalculatorModal from "./Modal/setupCalculatorModal";
 import Log from "./Log/Log";
+import Dice from "./Dice/Dice";
+import Coin from "./Coin/Coin";
 
 const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
   const [{ player1, player2, log }, dispatch] = useReducer(
@@ -52,8 +54,12 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
     <div className="duel-grid-container">
       {duelist[0]}
       <div className="displayArea-middle">
-        <div>Dice toss</div>
-        <div>Coin flip</div>
+        <div>
+          <button onClick={() => setToggleModal("dice")}>Dice toss</button>
+        </div>
+        <div>
+          <button onClick={() => setToggleModal("coin")}>Coin</button>
+        </div>
         <div>
           <button
             onClick={() => dispatch({ type: "RESET_STATE", payload: true })}
@@ -79,6 +85,14 @@ const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
         ) : toggleModal === "log" ? (
           <Modal>
             <Log logData={log} closeModal={() => setToggleModal("closed")} />
+          </Modal>
+        ) : toggleModal === "dice" ? (
+          <Modal>
+            <Dice closeModal={() => setToggleModal("closed")} />
+          </Modal>
+        ) : toggleModal === "coin" ? (
+          <Modal>
+            <Coin closeModal={() => setToggleModal("closed")} />
           </Modal>
         ) : null}
       </>
