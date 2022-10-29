@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { CalculatorData } from "../../interfaces/duelDisplayTypes";
+import { CalculatorData } from "../../interfaces/DisplayTypes";
 
 const Log: FunctionComponent<{
   logData: CalculatorData[];
@@ -15,12 +15,9 @@ const Log: FunctionComponent<{
       ) : (
         logData.map((data, i) => (
           <div key={i} className="log-entry">
-            <h6>{data.player}</h6>
+            <h6>Player {data.player.slice(-1)}</h6>
             <div>
-              {data.currentLP} {data.operand} {data.modifier} ={" "}
-              {data.operand === "+"
-                ? data.currentLP + data.modifier
-                : data.currentLP - data.modifier}
+              {data.currentLP} {data.operand} {data.modifier} = {data.remainder}
             </div>
           </div>
         ))

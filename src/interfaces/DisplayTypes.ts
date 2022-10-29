@@ -1,7 +1,4 @@
-import { SetStateAction } from "react";
-
-type CalculatorActionTypes = "INCREMENT" | "DECREMENT";
-
+// REDUCER & 'GLOBAL' STATE RELATED
 export type PlayerData = {
   lp: number;
   playerName: PlayerNames;
@@ -14,9 +11,10 @@ export type DisplayStates = {
   log: CalculatorData[];
 };
 
+// CALCULATIONS RELATED
 export type DisplayActions =
   | {
-      type: CalculatorActionTypes;
+      type: "INCREMENT" | "DECREMENT";
       payload: {
         operand2: number;
         player: PlayerNames;
@@ -29,20 +27,18 @@ export type DisplayActions =
   | {
       type: "UPDATE_LOG";
       payload: CalculatorData;
+    }
+  | {
+      type: "HALF_LP";
+      payload: PlayerNames;
     };
-
-export type Operands = "+" | "-";
 
 export type CalculatorData = {
   player: PlayerNames;
   currentLP: number;
   modifier: number;
-  operand: Operands;
-};
-
-export type ModalStateModifiers = {
-  setToggleModal: (v: SetStateAction<ModalViews>) => void;
-  setCalculationData: (v: SetStateAction<CalculatorData>) => void;
+  operand: "+" | "-" | "/";
+  remainder: undefined | number;
 };
 
 export type ModalViews = "closed" | "calculator" | "log" | "dice" | "coin";

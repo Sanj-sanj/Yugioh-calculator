@@ -1,8 +1,5 @@
 import { Dispatch, FunctionComponent, useState } from "react";
-import {
-  CalculatorData,
-  DisplayActions,
-} from "../../interfaces/duelDisplayTypes";
+import { CalculatorData, DisplayActions } from "../../interfaces/DisplayTypes";
 import {
   calculatorContextSubmit,
   deleteLastInput,
@@ -21,7 +18,7 @@ const Calculator: FunctionComponent<{
     ["1", "2", "3"],
     ["4", "5", "6"],
     ["7", "8", "9"],
-    ["0", "00"],
+    ["00", "0"],
   ].map((row) =>
     row.map((number) => (
       <button

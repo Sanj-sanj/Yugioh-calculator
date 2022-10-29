@@ -1,78 +1,75 @@
 import { FunctionComponent, useReducer, useState } from "react";
-import {
-  CalculatorData,
-  ModalViews,
-  PlayerData,
-} from "../interfaces/duelDisplayTypes";
+import { CalculatorData, ModalViews } from "../interfaces/DisplayTypes";
 import {
   duelDisplayState,
   initialCalculationState,
 } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
-import DuelistCounter from "./DuelistCounter";
+import DuelistCounter from "./Counter/DuelistCounter";
 import Calculator from "./Calculator/Calculator";
 import Modal from "./Modal/Modal";
-import setupCalculatorModal from "./Modal/setupCalculatorModal";
 import Log from "./Log/Log";
 import Dice from "./Dice/Dice";
 import Coin from "./Coin/Coin";
 
-const DuelApp: FunctionComponent<{ players: string[] }> = ({ players }) => {
+const DuelApp: FunctionComponent = () => {
   const [{ player1, player2, log }, dispatch] = useReducer(
     displayReducer,
     duelDisplayState
   );
-
-  //convert this state into a string, which will only accept strings of spcifc actions ex: calculator | Dice | logs | coin
   //these strings will be used to determine which modal to render
   const [toggleModal, setToggleModal] = useState<ModalViews>("closed");
 
+  //this state is passed to the DuelistCounter components, which only really uses
   const [calculationData, setCalculationData] = useState<CalculatorData>(
     initialCalculationState
   );
 
-  const itter = [player1, player2][Symbol.iterator]();
-  const duelist = players.map((playerName, i) => {
-    const player = itter.next().value as PlayerData;
-    return (
-      <DuelistCounter
-        key={i}
-        currentLP={player.lp}
-        duelistName={player.playerName}
-        openModal={(calcData: CalculatorData) =>
-          setupCalculatorModal(calcData, { setToggleModal, setCalculationData })
-        }
-        id={player.playerName}
-        className={`duelist duelist-${i + 1} ${
-          (i === 1 && "display-reverse") || ""
-        }`}
-      />
-    );
-  });
-
   return (
     <div className="duel-grid-container">
-      {duelist[0]}
+      <DuelistCounter
+        duelistName="Player 1"
+        playerData={player1}
+        calculatorData={calculationData}
+        openModal={(calcData) => {
+          setToggleModal("calculator");
+          setCalculationData(calcData);
+        }}
+        className="duelist duelist-1"
+        divideLp={(data) => {
+          setCalculationData(data);
+          dispatch({ type: "HALF_LP", payload: data.player });
+          dispatch({ type: "UPDATE_LOG", payload: data });
+        }}
+      />
+      {/* {duelist[0]} */}
       <div className="displayArea-middle">
-        <div>
-          <button onClick={() => setToggleModal("dice")}>Dice toss</button>
-        </div>
-        <div>
-          <button onClick={() => setToggleModal("coin")}>Coin</button>
-        </div>
-        <div>
-          <button
-            onClick={() => dispatch({ type: "RESET_STATE", payload: true })}
-          >
-            Reset
-          </button>
-        </div>
-        <div>
-          <button onClick={() => setToggleModal("log")}>Logs</button>
-        </div>
+        <button onClick={() => setToggleModal("dice")}>Dice toss</button>
+        <button onClick={() => setToggleModal("coin")}>Coin</button>
+        <button
+          onClick={() => dispatch({ type: "RESET_STATE", payload: true })}
+        >
+          Reset
+        </button>
+        <button onClick={() => setToggleModal("log")}>Logs</button>
         <div>timer</div>
       </div>
-      {duelist[1]}
+      {/* {duelist[1]} */}
+      <DuelistCounter
+        duelistName={"Player 2"}
+        calculatorData={calculationData}
+        playerData={player2}
+        openModal={(calcData) => {
+          setToggleModal("calculator");
+          setCalculationData(calcData);
+        }}
+        className="duelist duelist-2 display-reverse"
+        divideLp={(data) => {
+          setCalculationData(data);
+          dispatch({ type: "HALF_LP", payload: data.player });
+          dispatch({ type: "UPDATE_LOG", payload: data });
+        }}
+      />{" "}
       <>
         {toggleModal === "calculator" ? (
           <Modal>

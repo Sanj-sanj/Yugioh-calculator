@@ -5,6 +5,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .App {
   width: 100%;
@@ -48,17 +49,15 @@ THIS IS COMPONENT CSS
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: x-large;
 }
 .life-bar {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   width: 100%;
-  /* padding: 0.5em; */
   min-height: 3em;
   color: whitesmoke;
-  /* background-color: #06a84a; */
-  border: solid 2px #199477;
+  outline: solid 2px #199477;
   border-radius: 1em;
 }
 .display-reverse > .duel-display > .life-bar {
@@ -81,6 +80,7 @@ THIS IS COMPONENT CSS
   height: 100%;
   padding-left: 1em;
   align-items: center;
+  font-size: xx-large;
 }
 .display-reverse > .duel-display > .life-bar > .lp-ammount {
 padding-left: 0;

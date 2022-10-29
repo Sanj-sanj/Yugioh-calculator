@@ -1,15 +1,14 @@
 import { Dispatch, SetStateAction } from "react";
-import {
-  CalculatorData,
-  DisplayActions,
-} from "../../interfaces/duelDisplayTypes";
+import { CalculatorData, DisplayActions } from "../../interfaces/DisplayTypes";
 
 export function calculatorContextSubmit(
   dispatch: React.Dispatch<DisplayActions>,
   calculationData: CalculatorData,
   userLpInput: string
 ) {
+  let remainder = 0;
   if (calculationData.operand === "+") {
+    remainder = calculationData.currentLP + parseInt(userLpInput);
     dispatch({
       type: "INCREMENT",
       payload: {
@@ -17,7 +16,8 @@ export function calculatorContextSubmit(
         player: calculationData.player,
       },
     });
-  } else {
+  } else if (calculationData.operand === "-") {
+    remainder = calculationData.currentLP - parseInt(userLpInput);
     dispatch({
       type: "DECREMENT",
       payload: {
@@ -28,7 +28,11 @@ export function calculatorContextSubmit(
   }
   dispatch({
     type: "UPDATE_LOG",
-    payload: { ...calculationData, modifier: parseInt(userLpInput) },
+    payload: {
+      ...calculationData,
+      modifier: parseInt(userLpInput),
+      remainder: remainder,
+    },
   });
 }
 

@@ -1,4 +1,4 @@
-import { CalculatorData, DisplayStates } from "../interfaces/duelDisplayTypes";
+import { CalculatorData, DisplayStates } from "../interfaces/DisplayTypes";
 
 export const duelDisplayState: DisplayStates = {
   player1: {
@@ -18,4 +18,5 @@ export const initialCalculationState: CalculatorData = {
   currentLP: 8000,
   operand: "+",
   modifier: 0,
+  remainder: undefined,
 };

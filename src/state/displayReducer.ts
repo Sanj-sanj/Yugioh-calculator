@@ -1,4 +1,4 @@
-import { DisplayActions, DisplayStates } from "../interfaces/duelDisplayTypes";
+import { DisplayActions, DisplayStates } from "../interfaces/DisplayTypes";
 import { duelDisplayState } from "./duelDisplayState";
 
 const displayReducer = (
@@ -45,7 +45,14 @@ const displayReducer = (
       return state;
     case "UPDATE_LOG":
       return { ...state, log: [...state.log, action.payload] };
-
+    case "HALF_LP": {
+      const player = action.payload;
+      const remainder = state[player].lp / 2;
+      return {
+        ...state,
+        [player]: { ...state[player], lp: remainder <= 0 ? 0 : remainder },
+      };
+    }
     default:
       return state;
   }
