@@ -1,13 +1,18 @@
 import { CalculatorData, DisplayStates } from "../interfaces/DisplayTypes";
 
+//these player properties are accessed using the playerName property of CalculationData
+//playerName is for matching properties
+//duelistName is for display purposes only
 export const duelDisplayState: DisplayStates = {
   player1: {
     lp: 8000,
     playerName: "player1",
+    duelistName: "Duelist 1",
   },
   player2: {
     lp: 8000,
     playerName: "player2",
+    duelistName: "Duelist 2",
   },
   log: [],
 };

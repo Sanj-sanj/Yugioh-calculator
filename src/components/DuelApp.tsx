@@ -20,7 +20,7 @@ const DuelApp: FunctionComponent = () => {
   //these strings will be used to determine which modal to render
   const [toggleModal, setToggleModal] = useState<ModalViews>("closed");
 
-  //this state is passed to the DuelistCounter components, which only really uses
+  //this state is passed to the DuelistCounter components, which only really uses updates the operand && currentLP for any given calculation (p1, p2)
   const [calculationData, setCalculationData] = useState<CalculatorData>(
     initialCalculationState
   );
@@ -28,15 +28,15 @@ const DuelApp: FunctionComponent = () => {
   return (
     <div className="duel-grid-container">
       <DuelistCounter
-        duelistName="Player 1"
+        duelistName={player1.duelistName}
+        className="duelist duelist-1"
         playerData={player1}
         calculatorData={calculationData}
         openModal={(calcData) => {
           setToggleModal("calculator");
           setCalculationData(calcData);
         }}
-        className="duelist duelist-1"
-        divideLp={(data) => {
+        halfLp={(data) => {
           setCalculationData(data);
           dispatch({ type: "HALF_LP", payload: data.player });
           dispatch({ type: "UPDATE_LOG", payload: data });
@@ -56,15 +56,15 @@ const DuelApp: FunctionComponent = () => {
       </div>
       {/* {duelist[1]} */}
       <DuelistCounter
-        duelistName={"Player 2"}
+        duelistName={player2.duelistName}
+        className="duelist duelist-2 display-reverse"
         calculatorData={calculationData}
         playerData={player2}
         openModal={(calcData) => {
           setToggleModal("calculator");
           setCalculationData(calcData);
         }}
-        className="duelist duelist-2 display-reverse"
-        divideLp={(data) => {
+        halfLp={(data) => {
           setCalculationData(data);
           dispatch({ type: "HALF_LP", payload: data.player });
           dispatch({ type: "UPDATE_LOG", payload: data });

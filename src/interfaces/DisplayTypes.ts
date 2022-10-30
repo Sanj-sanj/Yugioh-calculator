@@ -2,6 +2,7 @@
 export type PlayerData = {
   lp: number;
   playerName: PlayerNames;
+  duelistName: string;
 };
 export type PlayerNames = "player1" | "player2";
 

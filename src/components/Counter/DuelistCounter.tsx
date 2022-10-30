@@ -6,7 +6,7 @@ type DISPLAY_DATA = {
   duelistName: string;
   className: string;
   playerData: PlayerData;
-  divideLp: (data: CalculatorData) => void;
+  halfLp: (data: CalculatorData) => void;
   openModal: (data: CalculatorData) => void;
 };
 
@@ -14,7 +14,7 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
   openModal,
   duelistName,
   className,
-  divideLp,
+  halfLp,
   calculatorData,
   playerData,
 }: DISPLAY_DATA) => {
@@ -59,7 +59,7 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
         </button>
         <button
           onClick={() =>
-            divideLp({
+            halfLp({
               operand: "/",
               player: playerData.playerName,
               currentLP: playerData.lp,
