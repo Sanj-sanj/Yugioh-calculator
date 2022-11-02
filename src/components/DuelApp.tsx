@@ -39,7 +39,7 @@ const DuelApp: FunctionComponent = () => {
         halfLp={(data) => {
           setCalculationData(data);
           dispatch({ type: "HALF_LP", payload: data.player });
-          dispatch({ type: "UPDATE_LOG", payload: data });
+          dispatch({ type: "UPDATE_LOG", payload: [data] });
         }}
       />
       {/* {duelist[0]} */}
@@ -67,7 +67,7 @@ const DuelApp: FunctionComponent = () => {
         halfLp={(data) => {
           setCalculationData(data);
           dispatch({ type: "HALF_LP", payload: data.player });
-          dispatch({ type: "UPDATE_LOG", payload: data });
+          dispatch({ type: "UPDATE_LOG", payload: [data] });
         }}
       />{" "}
       <>
@@ -85,11 +85,17 @@ const DuelApp: FunctionComponent = () => {
           </Modal>
         ) : toggleModal === "dice" ? (
           <Modal>
-            <Dice closeModal={() => setToggleModal("closed")} />
+            <Dice
+              closeModal={() => setToggleModal("closed")}
+              dispatch={dispatch}
+            />
           </Modal>
         ) : toggleModal === "coin" ? (
           <Modal>
-            <Coin closeModal={() => setToggleModal("closed")} />
+            <Coin
+              dispatch={dispatch}
+              closeModal={() => setToggleModal("closed")}
+            />
           </Modal>
         ) : null}
       </>

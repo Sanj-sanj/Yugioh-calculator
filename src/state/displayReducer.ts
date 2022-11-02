@@ -44,7 +44,8 @@ const displayReducer = (
       }
       return state;
     case "UPDATE_LOG":
-      return { ...state, log: [...state.log, action.payload] };
+      state.log;
+      return { ...state, log: [...state.log, ...action.payload] };
     case "HALF_LP": {
       const player = action.payload;
       const remainder = state[player].lp / 2;

@@ -6,10 +6,12 @@ export type PlayerData = {
 };
 export type PlayerNames = "player1" | "player2";
 
+export type LogData = (CalculatorData | MiniGameData)[];
+
 export type DisplayStates = {
   player1: PlayerData;
   player2: PlayerData;
-  log: CalculatorData[];
+  log: LogData;
 };
 
 // CALCULATIONS RELATED
@@ -27,7 +29,7 @@ export type DisplayActions =
     }
   | {
       type: "UPDATE_LOG";
-      payload: CalculatorData;
+      payload: [CalculatorData] | [minigame: MiniGameData];
     }
   | {
       type: "HALF_LP";
@@ -41,5 +43,13 @@ export type CalculatorData = {
   operand: "+" | "-" | "/";
   remainder: undefined | number;
 };
-
+export type MiniGameData =
+  | {
+      game: "dice";
+      outcome: number;
+    }
+  | {
+      game: "coin";
+      outcome: "heads" | "tails";
+    };
 export type ModalViews = "closed" | "calculator" | "log" | "dice" | "coin";

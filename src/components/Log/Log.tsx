@@ -1,8 +1,8 @@
 import { FunctionComponent } from "react";
-import { CalculatorData } from "../../interfaces/DisplayTypes";
+import { LogData } from "../../interfaces/DisplayTypes";
 
 const Log: FunctionComponent<{
-  logData: CalculatorData[];
+  logData: LogData;
   closeModal: () => void;
 }> = ({ logData, closeModal }) => {
   return (
@@ -13,14 +13,22 @@ const Log: FunctionComponent<{
           <div>Tap/Click on the log to close this dialogue.</div>
         </>
       ) : (
-        logData.map((data, i) => (
-          <div key={i} className="log-entry">
-            <h6>Player {data.player.slice(-1)}</h6>
-            <div>
-              {data.currentLP} {data.operand} {data.modifier} = {data.remainder}
+        logData.map((data, i) => {
+          return "player" in data ? (
+            <div key={i} className="log-entry">
+              <h6>Player {data.player.slice(-1)}</h6>
+              <div>
+                {data.currentLP} {data.operand} {data.modifier} ={" "}
+                {data.remainder}
+              </div>
             </div>
-          </div>
-        ))
+          ) : (
+            <div key={i} className="log-entry">
+              <h6>Mini-Game: {data.game}</h6>
+              <div>{data.outcome}</div>
+            </div>
+          );
+        })
       )}
     </button>
   );

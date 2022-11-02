@@ -28,11 +28,13 @@ export function calculatorContextSubmit(
   }
   dispatch({
     type: "UPDATE_LOG",
-    payload: {
-      ...calculationData,
-      modifier: parseInt(userLpInput),
-      remainder: remainder,
-    },
+    payload: [
+      {
+        ...calculationData,
+        modifier: parseInt(userLpInput),
+        remainder: remainder,
+      },
+    ],
   });
 }
 
