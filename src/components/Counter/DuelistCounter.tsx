@@ -8,6 +8,7 @@ type DISPLAY_DATA = {
   playerData: PlayerData;
   halfLp: (data: CalculatorData) => void;
   openModal: (data: CalculatorData) => void;
+  undo: (data: CalculatorData) => void;
 };
 
 const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
@@ -17,22 +18,35 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
   halfLp,
   calculatorData,
   playerData,
+  undo,
 }: DISPLAY_DATA) => {
+  console.log(duelistName, calculatorData);
   return (
     <div className={`duel-display-container ${className}`}>
-      <div className="duel-display">
+      <div
+        className="
+      display-area"
+      >
         <div className="duel-display-name">{duelistName}</div>
-        <div className="life-bar">
-          <div
-            className={`life-bar-fill ${playerData.lp}`}
-            style={{ width: `${(playerData.lp / 8000) * 100}%` }}
-          ></div>
+        <div className="life-bar-container">
+          <div className="life-bar">
+            <div
+              className="life-bar-fill"
+              style={{ width: `${(playerData.lp / 8000) * 100}%` }}
+            ></div>
+          </div>
           <span className="lp-ammount">{playerData.lp}</span>
         </div>
       </div>
       <div className="display-interact">
         {/* { passing back the operand and Lp values so the modal has the updated with knowledge of which button } */}
         {/* { modifier && remainder is not assigned yet, default: 'zero'. Then, it will be updated in the reducer by the calc component } */}
+        <button className="undo" onClick={() => undo(calculatorData)}>
+          undo
+        </button>
+        {/*
+  for + && - dispatch actions, omit {modifier, remainder} properties
+  */}
         <button
           onClick={() =>
             openModal({
@@ -64,7 +78,7 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
               player: playerData.playerName,
               currentLP: playerData.lp,
               modifier: 2,
-              remainder: playerData.lp / 2,
+              remainder: Math.round(playerData.lp / 2),
             })
           }
         >

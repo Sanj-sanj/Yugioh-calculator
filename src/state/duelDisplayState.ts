@@ -18,10 +18,22 @@ export const duelDisplayState: DisplayStates = {
 };
 
 //state that gets consumed by Calculator component once passed to each Duel display
-export const initialCalculationState: CalculatorData = {
-  player: "player1",
-  currentLP: 8000,
-  operand: "+",
-  modifier: 0,
-  remainder: undefined,
+export const initialCalculationState: {
+  player1: CalculatorData;
+  player2: CalculatorData;
+} = {
+  player1: {
+    player: "player1",
+    currentLP: 8000,
+    operand: "+",
+    modifier: 0,
+    remainder: undefined,
+  },
+  player2: {
+    player: "player2",
+    currentLP: 8000,
+    operand: "+",
+    modifier: 0,
+    remainder: undefined,
+  },
 };

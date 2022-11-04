@@ -5,7 +5,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .App {
   width: 100%;
@@ -15,33 +16,39 @@
 /*
 THIS IS COMPONENT CSS
 */
-.duel-display-container-top {
+.duel-display-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.display-area {
+  display: flex;
+  position: relative;
+  width: 100%;
 }
 .display-reverse {
   display: flex;
   flex-direction: column-reverse;
-  padding: .125em;
+  padding: 0.125em;
 }
+/* DISPLAY AREA BUTTON CONTAINER */
 .display-interact {
   display: flex;
-  justify-content: space-around;
-  margin-left: 79%;
+  justify-content: flex-end;
   padding: 0.5em;
+  width: 100%;
 }
 /* OVERWRITE FOR BOTTOM DISPLAY */
 .display-reverse > .display-interact {
   margin-left: 0;
-  margin-right: 79%;
-}
-.duel-display {
-  display: flex;
-  position: relative
+  justify-content: flex-start;
 }
 /* OVERWRITE FOR BOTTOM DISPLAY */
-.display-reverse > .duel-display {
+.display-reverse > .display-area {
   flex-direction: row-reverse;
+}
+.display-interact > button {
+  margin: 0em 0.5em;
 }
 .duel-display-name {
   min-width: 9rem;
@@ -51,17 +58,20 @@ THIS IS COMPONENT CSS
   justify-content: center;
   font-size: x-large;
 }
-.life-bar {
+
+.life-bar-container {
+  width: 100%;
   display: flex;
-  flex-direction: row;
+}
+.life-bar {
   width: 100%;
   min-height: 3em;
-  color: whitesmoke;
-  outline: solid 2px #199477;
-  border-radius: 1em;
+  border: solid 2px #199477;
+  border-radius: 5em;
+  padding: 0.5em;
 }
-.display-reverse > .duel-display > .life-bar {
-  justify-content: end;
+.display-reverse > .display-area > .life-bar-container {
+  flex-direction: row-reverse;
 }
 .life-bar-fill {
   border-radius: 0.875em;
@@ -75,16 +85,17 @@ THIS IS COMPONENT CSS
   width: 100%;
 }
 .lp-ammount {
-  position: absolute;
   display: flex;
   height: 100%;
+  max-width: 3em;
+  min-width: 3em;
   padding-left: 1em;
   align-items: center;
   font-size: xx-large;
 }
-.display-reverse > .duel-display > .life-bar > .lp-ammount {
-padding-left: 0;
-padding-right: 1em;
+.display-reverse > .display-area > .life-bar-container > .lp-ammount {
+  padding-left: 0;
+  padding-right: 1em;
 }
 
 .duel-grid-container {
@@ -98,22 +109,16 @@ padding-right: 1em;
   display: flex;
   justify-content: space-around;
   border: #06a84a 1px solid;
-} 
+}
 
 .display-left {
-  /* position: absolute; */
   transform: rotate(90deg);
-
   width: 100%;
-  /* left: 0; */
 }
 .display-right {
-  /* position: absolute; */
   transform: rotate(-90deg);
   width: 100%;
-  /* right: 0; */
 }
-
 
 /* MODAL CSS */
 .modal-container {
@@ -137,23 +142,26 @@ padding-right: 1em;
   background-color: #071b17;
   padding: 0.5em;
   font-size: 20px;
-  text-align: right ;
-  width: 80%;
+  text-align: right;
+  /* width: 80%; */
+  flex: 55;
 }
 .calc-top {
   display: flex;
 }
 .calc-row {
   display: flex;
+  width: 100%;
 }
 .calc-button {
-  padding: 1em 2em;
-  width: 100%;
+  /* padding: 1em 2em; */
   background-color: #02281f;
   border: #06a84a solid 1px;
+  flex: 1;
 }
 .calc-top > .calc-button {
-  width: 20%;
+  /* width: 20%; */
+  flex: 4 0 auto;
 }
 
 /* LOGS CSS */
@@ -165,10 +173,15 @@ padding-right: 1em;
   padding: 1em 0;
   line-height: 1.5em;
 }
+.log > button {
+  width: 100%;
+  background: inherit;
+  padding: 0;
+}
 .log-entry {
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em 0;
 }
 
 /* DICE CSS */

@@ -12,12 +12,14 @@ const displayReducer = (
         typeof action.payload.operand2 === "number"
       ) {
         const player = action.payload.player;
-
+        const remainder = Math.round(
+          state[player].lp + action.payload.operand2
+        );
         return {
           ...state,
           [player]: {
             ...state[player],
-            lp: state[player].lp + action.payload.operand2,
+            lp: remainder,
           },
         };
       }
@@ -28,7 +30,9 @@ const displayReducer = (
         typeof action.payload.operand2 === "number"
       ) {
         const player = action.payload.player;
-        const remainder = state[player].lp - action.payload.operand2;
+        const remainder = Math.round(
+          state[player].lp - action.payload.operand2
+        );
         return {
           ...state,
           [player]: {
@@ -48,12 +52,20 @@ const displayReducer = (
       return { ...state, log: [...state.log, ...action.payload] };
     case "HALF_LP": {
       const player = action.payload;
-      const remainder = state[player].lp / 2;
+      const remainder = Math.round(state[player].lp / 2);
       return {
         ...state,
         [player]: { ...state[player], lp: remainder <= 0 ? 0 : remainder },
       };
     }
+    case "UNDO": {
+      const player = action.payload.name;
+      return {
+        ...state,
+        [player]: { ...state[player], lp: action.payload.adjustedLP },
+      };
+    }
+
     default:
       return state;
   }

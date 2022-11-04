@@ -34,13 +34,20 @@ export type DisplayActions =
   | {
       type: "HALF_LP";
       payload: PlayerNames;
+    }
+  | {
+      type: "UNDO";
+      payload: {
+        name: PlayerNames;
+        adjustedLP: number;
+      };
     };
 
 export type CalculatorData = {
   player: PlayerNames;
   currentLP: number;
   modifier: number;
-  operand: "+" | "-" | "/";
+  operand: "+" | "-" | "/" | "*";
   remainder: undefined | number;
 };
 export type MiniGameData =
@@ -53,3 +60,4 @@ export type MiniGameData =
       outcome: "heads" | "tails";
     };
 export type ModalViews = "closed" | "calculator" | "log" | "dice" | "coin";
+export type ModalActions = { player: PlayerNames; view: ModalViews };
