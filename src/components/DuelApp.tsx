@@ -1,38 +1,20 @@
-import {
-  Dispatch,
-  FunctionComponent,
-  SetStateAction,
-  useReducer,
-  useState,
-} from "react";
-import {
-  CalculatorData,
-  DisplayActions,
-  ModalActions,
-} from "../interfaces/DisplayTypes";
+import { FunctionComponent, useReducer, useState } from "react";
+import { CalculatorData } from "../interfaces/DisplayTypes";
 import {
   duelDisplayState,
   initialCalculationState,
 } from "../state/duelDisplayState";
 import displayReducer from "../state/displayReducer";
 import DuelistCounter from "./Counter/DuelistCounter";
-import Calculator from "./Calculator/Calculator";
-import Modal from "./Modal/Modal";
-import Log from "./Log/Log";
-import Dice from "./Dice/Dice";
-import Coin from "./Coin/Coin";
 import undoPreviousCalculation from "./DuelAppUtilities";
+import UseModal from "./Modal/UseModal";
 
 const DuelApp: FunctionComponent = () => {
   const [{ player1, player2, log }, dispatch] = useReducer(
     displayReducer,
     duelDisplayState
   );
-  //used to determine which modal 'view' state to render, under which 'player' state to use
-  const [modalVisible, setModalVisible] = useState<ModalActions>({
-    player: "player1",
-    view: "closed",
-  });
+
   /*
    * this state is passed to the DuelistCounter & Calculator components,
    * this data is used throughout to handle many utility functions
@@ -42,6 +24,15 @@ const DuelApp: FunctionComponent = () => {
   );
   const [player2Data, setPlayer2Data] = useState<CalculatorData>(
     initialCalculationState.player2
+  );
+
+  //used to determine which modal 'view' state to render, under which 'player' state to use
+  const { currentModal, modalVisible, setModalVisible } = UseModal(
+    { player1: player1Data, player2: player2Data },
+    {
+      log,
+      dispatch,
+    }
   );
 
   return (
@@ -109,48 +100,7 @@ const DuelApp: FunctionComponent = () => {
           undoPreviousCalculation(data, player2Data, dispatch)
         }
       />
-      <>
-        {modalVisible.view === "calculator" ? (
-          <Modal>
-            <Calculator
-              calculationData={
-                modalVisible.player === "player1" ? player1Data : player2Data
-              }
-              displayDispatch={dispatch}
-              closeModal={() =>
-                setModalVisible({ player: modalVisible.player, view: "closed" })
-              }
-            />
-          </Modal>
-        ) : modalVisible.view === "log" ? (
-          <Modal>
-            <Log
-              logData={log}
-              closeModal={() =>
-                setModalVisible({ player: modalVisible.player, view: "closed" })
-              }
-            />
-          </Modal>
-        ) : modalVisible.view === "dice" ? (
-          <Modal>
-            <Dice
-              closeModal={() =>
-                setModalVisible({ player: modalVisible.player, view: "closed" })
-              }
-              dispatch={dispatch}
-            />
-          </Modal>
-        ) : modalVisible.view === "coin" ? (
-          <Modal>
-            <Coin
-              dispatch={dispatch}
-              closeModal={() =>
-                setModalVisible({ player: modalVisible.player, view: "closed" })
-              }
-            />
-          </Modal>
-        ) : null}
-      </>
+      <>{currentModal}</>
     </div>
   );
 };
