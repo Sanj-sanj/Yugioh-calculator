@@ -3,30 +3,30 @@ import { CalculatorData, PlayerData } from "../../interfaces/DisplayTypes";
 
 type DISPLAY_DATA = {
   calculatorData: CalculatorData;
-  duelistName: string;
-  className: string;
   playerData: PlayerData;
   halfLp: (data: CalculatorData) => void;
   openModal: (data: CalculatorData) => void;
-  undo: (data: CalculatorData) => void;
+  undoLastCalculation: (data: CalculatorData) => void;
 };
 
 const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
   openModal,
-  duelistName,
-  className,
   halfLp,
   calculatorData,
   playerData,
-  undo,
+  undoLastCalculation,
 }: DISPLAY_DATA) => {
   return (
-    <div className={`duel-display-container ${className}`}>
+    <div
+      className={`duel-display-container ${
+        playerData.playerName === "player2" ? "display-reverse" : ""
+      }`}
+    >
       <div
         className="
       display-area"
       >
-        <div className="duel-display-name">{duelistName}</div>
+        <div className="duel-display-name">{playerData.duelistName}</div>
         <div className="life-bar-container">
           <div className="life-bar">
             <div
@@ -38,13 +38,14 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
         </div>
       </div>
       <div className="display-interact">
-        {/* { passing back the operand and Lp values so the modal has the updated with knowledge of which button } */}
-        {/* { modifier && remainder is not assigned yet, default: 'zero'. Then, it will be updated in the reducer by the calc component } */}
-        <button className="undo" onClick={() => undo(calculatorData)}>
+        <button
+          className="undo"
+          onClick={() => undoLastCalculation(calculatorData)}
+        >
           undo
         </button>
         {/*
-  for + && - dispatch actions, omit {modifier, remainder} properties
+  for "+" && "-" [button click] dispatch actions, omit {modifier, remainder} properties
   */}
         <button
           onClick={() =>
