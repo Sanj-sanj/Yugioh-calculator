@@ -47,13 +47,27 @@ const DuelApp: FunctionComponent = () => {
           dispatch({ type: "HALF_LP", payload: data.player });
           dispatch({ type: "UPDATE_LOG", payload: [data] });
         }}
-        undo={() => {
+        undo={(data) => {
           dispatch({
             type: "UNDO",
             payload: {
               name: player1Data.player,
               adjustedLP: player1Data.currentLP,
             },
+          });
+          dispatch({
+            type: "UPDATE_LOG",
+            payload: [
+              {
+                ...player1Data,
+                currentLP: data.remainder
+                  ? data.remainder
+                  : player1Data.currentLP,
+                remainder: data.currentLP,
+                operand:
+                  data.operand === "/" ? "*" : data.operand === "+" ? "-" : "+",
+              },
+            ],
           });
         }}
       />

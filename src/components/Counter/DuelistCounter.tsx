@@ -20,7 +20,6 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
   playerData,
   undo,
 }: DISPLAY_DATA) => {
-  console.log(duelistName, calculatorData);
   return (
     <div className={`duel-display-container ${className}`}>
       <div
