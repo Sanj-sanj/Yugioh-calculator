@@ -10,7 +10,8 @@ const Calculator: FunctionComponent<{
   calculationData: CalculatorData;
   displayDispatch: Dispatch<DisplayActions>;
   closeModal: () => void;
-}> = ({ calculationData, displayDispatch, closeModal }) => {
+  setPlayersData: (data: CalculatorData) => void;
+}> = ({ calculationData, displayDispatch, closeModal, setPlayersData }) => {
   const [userLpInput, setUserLpInput] = useState("0");
 
   // ================================ UTILS TO EXTRACT =======================
@@ -56,6 +57,7 @@ const Calculator: FunctionComponent<{
               calculationData,
               userLpInput
             );
+            setPlayersData({ ...calculationData, modifier: +userLpInput });
             closeModal();
           }}
         >

@@ -1,4 +1,4 @@
-import { Dispatch, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   CalculatorData,
   DisplayActions,
@@ -13,7 +13,15 @@ import Modal from "./Modal";
 
 export default function UseModal(
   playerData: { player1: CalculatorData; player2: CalculatorData },
-  { log, dispatch }: { log: LogData; dispatch: Dispatch<DisplayActions> }
+  {
+    log,
+    dispatch,
+    setPlayersData,
+  }: {
+    log: LogData;
+    dispatch: Dispatch<DisplayActions>;
+    setPlayersData: Dispatch<SetStateAction<typeof playerData>>;
+  }
 ) {
   const [modalVisible, setModalVisible] = useState<ModalActions>({
     player: "player1",
@@ -23,7 +31,6 @@ export default function UseModal(
 
   const getPlayerData = () => playerData[modalVisible.player];
   useEffect(() => {
-    console.log("oh pls no");
     if (modalVisible.view !== "closed") {
       setCurrentModal(modals[modalVisible.view]);
     } else {
@@ -41,6 +48,9 @@ export default function UseModal(
           calculationData={getPlayerData()}
           displayDispatch={dispatch}
           closeModal={closeModal}
+          setPlayersData={(data) =>
+            setPlayersData({ ...playerData, [modalVisible.player]: data })
+          }
         />
       </Modal>
     ),

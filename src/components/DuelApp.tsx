@@ -14,25 +14,19 @@ const DuelApp: FunctionComponent = () => {
     displayReducer,
     duelDisplayState
   );
-
   /*
    * this state is passed to the DuelistCounter & Calculator components,
    * this data is used throughout to handle many utility functions
    */
-  const [player1Data, setPlayer1Data] = useState<CalculatorData>(
-    initialCalculationState.player1
-  );
-  const [player2Data, setPlayer2Data] = useState<CalculatorData>(
-    initialCalculationState.player2
-  );
+  const [playersData, setPlayersData] = useState<{
+    player1: CalculatorData;
+    player2: CalculatorData;
+  }>(initialCalculationState);
 
   //used to determine which modal 'view' state to render, under which 'player' state to use
   const { currentModal, modalVisible, setModalVisible } = UseModal(
-    { player1: player1Data, player2: player2Data },
-    {
-      log,
-      dispatch,
-    }
+    playersData,
+    { log, dispatch, setPlayersData }
   );
 
   return (
@@ -40,18 +34,18 @@ const DuelApp: FunctionComponent = () => {
       {/* {duelist[0]} */}
       <DuelistCounter
         playerData={player1}
-        calculatorData={player1Data}
+        calculatorData={playersData.player1}
         openModal={(calcData) => {
           setModalVisible({ player: "player1", view: "calculator" });
-          setPlayer1Data(calcData);
+          setPlayersData({ ...playersData, player1: calcData });
         }}
         halfLp={(data) => {
-          setPlayer1Data(data);
+          setPlayersData({ ...playersData, player1: data });
           dispatch({ type: "HALF_LP", payload: data.player });
           dispatch({ type: "UPDATE_LOG", payload: [data] });
         }}
         undoLastCalculation={(data) =>
-          undoPreviousCalculation(data, player1Data, dispatch)
+          undoPreviousCalculation(data, playersData.player1, dispatch)
         }
       />
       <div className="displayArea-middle">
@@ -85,19 +79,19 @@ const DuelApp: FunctionComponent = () => {
       </div>
       {/* {duelist[1]} */}
       <DuelistCounter
-        calculatorData={player2Data}
+        calculatorData={playersData.player2}
         playerData={player2}
         openModal={(calcData) => {
           setModalVisible({ player: "player2", view: "calculator" });
-          setPlayer2Data(calcData);
+          setPlayersData({ ...playersData, player2: calcData });
         }}
         halfLp={(data) => {
-          setPlayer2Data(data);
+          setPlayersData({ ...playersData, player2: data });
           dispatch({ type: "HALF_LP", payload: data.player });
           dispatch({ type: "UPDATE_LOG", payload: [data] });
         }}
         undoLastCalculation={(data) =>
-          undoPreviousCalculation(data, player2Data, dispatch)
+          undoPreviousCalculation(data, playersData.player2, dispatch)
         }
       />
       <>{currentModal}</>

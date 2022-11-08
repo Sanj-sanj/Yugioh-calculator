@@ -40,7 +40,14 @@ const DuelistCounter: FunctionComponent<DISPLAY_DATA> = ({
       <div className="display-interact">
         <button
           className="undo"
-          onClick={() => undoLastCalculation(calculatorData)}
+          onClick={() => {
+            /*
+            if PDATA {realtime value} === CDATA {past value}
+            then dont do the undo, we dont need it being put into the log
+            */
+            playerData.lp !== calculatorData.currentLP &&
+              undoLastCalculation(calculatorData);
+          }}
         >
           undo
         </button>

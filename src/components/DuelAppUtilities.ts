@@ -16,20 +16,19 @@ export default function undoPreviousCalculation(
   dispatch({
     type: "UPDATE_LOG",
     payload: [
-      incomingData,
-      //   {
-      //     ...playerData,
-      //     currentLP: incomingData.remainder
-      //       ? incomingData.remainder
-      //       : playerData.currentLP,
-      //     remainder: incomingData.currentLP,
-      //     operand:
-      //       incomingData.operand === "/"
-      //         ? "*"
-      //         : incomingData.operand === "+"
-      //         ? "-"
-      //         : "+",
-      //   },
+      {
+        ...playerData,
+        currentLP: incomingData.remainder
+          ? incomingData.remainder
+          : playerData.currentLP,
+        remainder: incomingData.currentLP,
+        operand:
+          incomingData.operand === "/"
+            ? "*"
+            : incomingData.operand === "+"
+            ? "-"
+            : "+",
+      },
     ],
   });
 }
